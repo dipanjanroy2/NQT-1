@@ -33,7 +33,7 @@ The Nth term that is calculated by the program should be written to STDOUT.
 Other than the value of Nth term, no other characters/strings or message should be written to STDOUT.
 For example, when N = 14, the 14th term in the series is 17. So only the value 17 should be printed to STDOUT. 
 
-
+```
 #include<iostream>
 #define MAX 99999
 
@@ -103,7 +103,7 @@ int main(){
     return 0;
 }
 
-
+```
 
 
 
