@@ -1079,6 +1079,255 @@ int gcd (int i, int j, int k)
   return least;
 }
 ```
+## GCD Array of Numbers
+The GCD of three or more numbers equals the product of the prime factors common to all the numbers, but it can also be calculated by repeatedly taking the GCDs of pairs of numbers.
 
+gcd(a, b, c) = gcd(a, gcd(b, c)) 
+             = gcd(gcd(a, b), c) 
+             = gcd(gcd(a, c), b)
+For an array of elements, we do following.
+
+result = arr[0]
+For i = 1 to n-1
+   result = GCD(result, arr[i])
+Below is the implementation of above idea.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// Function to return gcd of a and b
+int gcd(int a, int b)
+{
+if (a == 0)
+return b;
+return gcd(b % a, a);
+}
+
+// Function to find gcd of array of
+// numbers
+int findGCD(int arr[], int n)
+{
+int result = arr[0];
+for (int i = 1; i < n; i++)
+result = gcd(arr[i], result);
+
+return result;
+}
+
+// Driven code
+int main()
+{
+int arr[] = { 2, 4, 6, 8, 16 };
+int n = sizeof(arr) / sizeof(arr[0]);
+cout << findGCD(arr, n) << endl;
+return 0;
+}
+```
+## K’th Smallest/Largest Element in Unsorted Array
+Given an array and a number k where k is smaller than size of array, we need to find the k’th smallest element in the given array. It is given that ll array elements are distinct.
+
+Examples:
+
+Input: arr[] = {7, 10, 4, 3, 20, 15}
+       k = 3
+Output: 7
+
+Input: arr[] = {7, 10, 4, 3, 20, 15}
+       k = 4
+Output: 10
+```
+// Simple C++ program to find k'th smallest element
+#include
+#include
+using namespace std;
+
+// Function to return k'th smallest element in a given array
+int kthSmallest(int arr[], int n, int k)
+{
+// Sort the given array
+sort(arr, arr+n);
+
+// Return k'th element in the sorted array
+return arr[k-1];
+}
+
+// Driver program to test above methods
+int main()
+{
+int arr[] = {12, 3, 5, 7, 19};
+int n = sizeof(arr)/sizeof(arr[0]), k = 2;
+cout << "K'th smallest element is " << kthSmallest(arr, n, k);
+return 0;
+}
+```
+## Write a function that accepts 2 strings search string and pattern string and returns TRUE if the pattern string is found in the search string and FALSE if the pattern string is not found in the search string
+Please also comment the code in other languages below – 
+```
+#include<stdio.h>
+#define TRUE 1
+#define FALSE 0
+
+int search(char sentence[], char pattern[]);
+
+int main()
+{
+    char sentence[1000];
+    char pattern[25];
+    int result;
+    printf(“Please enter a paragraph not exceeding 1000 characters :”);
+    gets(sentence);
+    printf(“\n\n“);
+    printf(“Please enter the search string :”);
+    gets(pattern);
+    result = search(sentence, pattern);
+}
+
+int search(char sentence[], char pattern[])
+{
+    char *p;
+    
+    /* The library function strstr searches for the pattern string in the sentence
+    string. If the pattern is found it returns a pointer to the index of the
+    pattern in the sentence. If not it returns NULL*/
+    
+    p = strstr(sentence, pattern);
+    
+    if ( p == NULL )
+    {
+        printf(“\nThe search string was not found in the sentence\n\n“);
+        return FALSE;
+    }
+    
+    else 
+    {
+        printf(“\nThe search string was found in the sentence\n\n“);
+        return TRUE;
+    }
+}
+```
+
+## Write a function to calculate the length of a string without using strlen function using Command Line Programming
+```
+#include <stdio.h>
+int main()
+{
+  char s[1000];
+  int c = 0;
+
+  printf(“Input a string\n“);
+  gets(s);
+
+  while (s[c] != ‘\0‘)
+    c++;
+
+  printf(“Length of the string: %d\n“, c);
+
+  return 0;
+}
+```
+## Pushing all 0’s
+
+Given an array of random numbers, Push all the zero’s of a given array to the end of the array. For example, if the given arrays is {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}, it should be changed to {1, 9, 8, 4, 2, 7, 6, 0, 0, 0, 0}. The order of all other elements should be same. Expected time complexity is O(n) and extra space is O(1).
+
+Example:
+
+Input :  arr[] = {1, 2, 0, 4, 3, 0, 5, 0};
+Output : arr[] = {1, 2, 4, 3, 5, 0, 0};
+
+Input : arr[]  = {1, 2, 0, 0, 0, 3, 6};
+Output : arr[] = {1, 2, 3, 6, 0, 0, 0};
+```
+#include using namespace std;
+
+// Function which pushes all zeros to end of an array.
+void pushZerosToEnd (int arr[], int n)
+{
+  int count = 0;        // Count of non-zero elements
+
+// Traverse the array. If element encountered is non-
+// zero, then replace the element at index ‘count’
+// with this element
+  for (int i = 0; i < n; i++)
+    if (arr[i] != 0)
+      arr[count++] = arr[i];    // here count is
+// incremented
+
+// Now all non-zero elements have been shifted to
+// front and ‘count’ is set as index of first 0.
+// Make all elements 0 from count to end.
+  while (count < n)
+    arr[count++] = 0;
+}
+
+// Driver program to test above function
+int main ()
+{
+  int arr[] = { 1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9 };
+  int n = sizeof (arr) / sizeof (arr[0]);
+  pushZerosToEnd (arr, n);
+  cout << “Array after pushing all zeros to end of array :n”;
+  for (int i = 0; i < n; i++)
+    cout << arr[i] << ” “;
+  return 0;
+}
+```
+## Write a program to swap 2 numbers without using the temporary variable
+```
+#include <stdio.h>
+int main()
+{
+int x = 10, y = 5;
+
+// Code to swap 'x' and 'y'
+x = x + y; // x now becomes 15
+y = x - y; // y becomes 10
+x = x - y; // x becomes 5
+
+printf("After Swapping: x = %d, y = %d", x, y);
+
+return 0;
+}
+```
+## Provide a fast way to multiply a number by 31
+Left shift the number by 5 bits and subtract the number once. For e.g., If the number is 10 left shift by 5 bits gives.
+
+Left Shift by 1 bit is multiplication by 2
+Left Shift by 5 bits is multiplication by 32
+
+Since we need to multiply by 31 what we do is multiply the number by 32 and subtract the number once.
+```
+#include<stdio.h>
+void main ()
+{
+  int T, n;
+  scanf (“%d”, &T);
+  n = T;
+  n = n << 5;
+  n = n – T;
+  printf (“%d”, n);
+}
+```
+## Write a program to multiply a number by 8 without using the * operator.
+```
+#include<stdio.h>
+void
+main ()
+{
+  int num, ans, n;
+  ans = 0;
+  n = 8;
+  printf (“\nEnter the number to be multiplied : “);
+  scanf (“%d”, &num);
+  while (n != 0)
+    {
+      ans = ans + num;
+      n = n – 1;
+    }
+  printf (“\nResult : %d”, ans);
+}
+ 
+```
 
 
